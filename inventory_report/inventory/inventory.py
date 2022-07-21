@@ -1,6 +1,7 @@
 import csv
 from inventory_report.reports.complete_report import CompleteReport
 from inventory_report.reports.simple_report import SimpleReport
+import json
 
 
 class Inventory:
@@ -13,6 +14,11 @@ class Inventory:
 
         return [dict(zip(head, row)) for row in data]
 
+    def generate_by_json(path):
+        with open(path, "r", encoding="utf-8") as file:
+
+            return json.load(file)
+
     def report_by_type(self, data, type):
         if type == "simples":
             return SimpleReport.generate(data)
@@ -24,5 +30,7 @@ class Inventory:
         if path.endswith("csv"):
             data = self.generate_by_csv(path)
 
-        print({type})
+        if path.endswith("json"):
+            data = self.generate_by_json(path)
+
         return self.report_by_type(self, data, type)
