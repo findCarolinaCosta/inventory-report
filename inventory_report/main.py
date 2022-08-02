@@ -12,7 +12,6 @@ def main():
         sys.stderr.write("Verifique os argumentos\n")
     else:
         _, file_path, report_type = sys.argv
-        print("iheiuwheiwh", file_path, report_type)
         inventory = InventoryRefactor(TYPES[file_path.split(".")[1]])
         report = inventory.import_data(file_path, report_type)
         print(report, end="")
